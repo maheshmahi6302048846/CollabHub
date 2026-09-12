@@ -19,4 +19,4 @@ jobs:
 
       - name: 🚀 Sync Code to InfinityFree
         run: |
-          git ftp push --force --passive --user "${{ secrets.FTP_USERNAME }}" --passwd "${{ secrets.FTP_PASSWORD }}" --syncroot . --url "ftp://${{ secrets.FTP_SERVER }}/htdocs/"
+          git ftp push --force --passive -u "${{ secrets.FTP_USERNAME }}" -p "${{ secrets.FTP_PASSWORD }}" "ftp://${{ secrets.FTP_SERVER }}/htdocs/"
