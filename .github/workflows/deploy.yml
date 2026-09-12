@@ -22,4 +22,5 @@ jobs:
           git config git-ftp.url "ftp://${{ secrets.FTP_SERVER }}/htdocs/"
           git config git-ftp.user "${{ secrets.FTP_USERNAME }}"
           git config git-ftp.password "${{ secrets.FTP_PASSWORD }}"
-          git ftp push --force --passive
+          git config git-ftp.passive true
+          git ftp init --force || git ftp push --force
