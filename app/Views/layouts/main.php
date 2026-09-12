@@ -107,80 +107,72 @@
         <div id="searchResultsList" style="margin-top:1rem;">
           <div style="font-size:0.8rem; font-weight:700; color:var(--gray-400); text-transform:uppercase; margin-bottom:0.5rem;">Popular Searches</div>
           <div style="display:flex; flex-wrap:wrap; gap:0.5rem;">
-            <a href="<?= base_url('campaigns?category=beauty') ?>" class="badge badge-primary" style="padding:0.4rem 0.8rem;">Beauty &amp; Fashion</a>
-            <a href="<?= base_url('campaigns?category=tech') ?>" class="badge badge-primary" style="padding:0.4rem 0.8rem;">Tech &amp; Gadgets</a>
-            <a href="<?= base_url('campaigns?type=paid') ?>" class="badge badge-success" style="padding:0.4rem 0.8rem;">Paid Collaborations</a>
-            <a href="<?= base_url('brand/influencers') ?>" class="badge badge-info" style="padding:0.4rem 0.8rem;">Top Creators</a>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 
   <!-- FOOTER -->
-  <footer style="background:var(--gray-900); color:white; padding:4rem 0 2rem; margin-top:5rem;">
+  <footer style="background: #0f172a; color: white; padding: 4rem 0 2rem; margin-top: 5rem;">
     <div class="container">
-      <div class="footer-grid">
-        <div>
-          <div class="brand-logo" style="color:white; margin-bottom:1rem;">
+      <div class="row g-4 mb-5">
+        <div class="col-12 col-lg-4">
+          <div class="brand-logo" style="color:white; margin-bottom: 1rem;">
             <div class="brand-logo-icon">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><polyline points="17 11 19 13 23 9"></polyline></svg>
             </div>
             <span>Collab<span style="color:var(--primary-400);">Hub</span></span>
           </div>
-          <p style="color:var(--gray-400); font-size:0.9rem; margin-bottom:1.5rem; max-width:300px;">
-            Connecting top content creators and forward-thinking brands for high-impact collaborations.
+          <p style="color: #94a3b8; font-size: 0.95rem; margin-bottom: 1.5rem; max-width: 320px; line-height: 1.6;">
+            Connecting top content creators and forward-thinking brands for high-impact collaborations worldwide.
           </p>
-          <div style="display:flex; gap:0.75rem; flex-wrap:wrap;">
-            <a href="#" class="btn btn-icon btn-outline" style="border-color:var(--gray-700); color:var(--gray-300);">IG</a>
-            <a href="#" class="btn btn-icon btn-outline" style="border-color:var(--gray-700); color:var(--gray-300);">YT</a>
-            <a href="#" class="btn btn-icon btn-outline" style="border-color:var(--gray-700); color:var(--gray-300);">TK</a>
-            <a href="#" class="btn btn-icon btn-outline" style="border-color:var(--gray-700); color:var(--gray-300);">LN</a>
+          <div class="d-flex gap-2">
+            <a href="#" class="btn btn-sm btn-outline-light rounded-circle" style="width: 36px; height: 36px; display: inline-flex; align-items: center; justify-content: center; font-weight: 600;">IG</a>
+            <a href="#" class="btn btn-sm btn-outline-light rounded-circle" style="width: 36px; height: 36px; display: inline-flex; align-items: center; justify-content: center; font-weight: 600;">YT</a>
+            <a href="#" class="btn btn-sm btn-outline-light rounded-circle" style="width: 36px; height: 36px; display: inline-flex; align-items: center; justify-content: center; font-weight: 600;">TK</a>
+            <a href="#" class="btn btn-sm btn-outline-light rounded-circle" style="width: 36px; height: 36px; display: inline-flex; align-items: center; justify-content: center; font-weight: 600;">LN</a>
           </div>
         </div>
 
-        <div>
-          <h4 style="color:white; font-size:1rem; margin-bottom:1.2rem;">For Influencers</h4>
-          <ul style="list-style:none; line-height:2.2; font-size:0.9rem;">
-            <li><a href="<?= base_url('for-influencers') ?>" style="color:var(--gray-400);">Find Campaigns</a></li>
-            <li><a href="<?= base_url('register?type=creator') ?>" style="color:var(--gray-400);">Create Creator Profile</a></li>
-            <li><a href="<?= base_url('how-it-works') ?>" style="color:var(--gray-400);">Monetization Guide</a></li>
-            <li><a href="<?= base_url('success-stories') ?>" style="color:var(--gray-400);">Creator Stories</a></li>
+        <div class="col-6 col-md-3 col-lg-2">
+          <h5 style="color: white; font-size: 1rem; font-weight: 600; margin-bottom: 1.2rem;">For Influencers</h5>
+          <ul class="list-unstyled d-flex flex-column gap-2" style="font-size: 0.9rem;">
+            <li><a href="<?= base_url('for-influencers') ?>" class="text-decoration-none" style="color: #94a3b8;">Find Campaigns</a></li>
+            <li><a href="<?= base_url('register?type=creator') ?>" class="text-decoration-none" style="color: #94a3b8;">Create Creator Profile</a></li>
+            <li><a href="<?= base_url('how-it-works') ?>" class="text-decoration-none" style="color: #94a3b8;">Monetization Guide</a></li>
+            <li><a href="<?= base_url('success-stories') ?>" class="text-decoration-none" style="color: #94a3b8;">Creator Stories</a></li>
           </ul>
         </div>
 
-        <div>
-          <h4 style="color:white; font-size:1rem; margin-bottom:1.2rem;">For Brands</h4>
-          <ul style="list-style:none; line-height:2.2; font-size:0.9rem;">
-            <li><a href="<?= base_url('for-brands') ?>" style="color:var(--gray-400);">Discover Influencers</a></li>
-            <li><a href="<?= base_url('register?type=brand') ?>" style="color:var(--gray-400);">Launch Campaign</a></li>
-            <li><a href="<?= base_url('pricing') ?>" style="color:var(--gray-400);">Brand Pricing</a></li>
-            <li><a href="<?= base_url('how-it-works') ?>" style="color:var(--gray-400);">ROI &amp; Analytics</a></li>
+        <div class="col-6 col-md-3 col-lg-2">
+          <h5 style="color: white; font-size: 1rem; font-weight: 600; margin-bottom: 1.2rem;">For Brands</h5>
+          <ul class="list-unstyled d-flex flex-column gap-2" style="font-size: 0.9rem;">
+            <li><a href="<?= base_url('for-brands') ?>" class="text-decoration-none" style="color: #94a3b8;">Discover Influencers</a></li>
+            <li><a href="<?= base_url('register?type=brand') ?>" class="text-decoration-none" style="color: #94a3b8;">Launch Campaign</a></li>
+            <li><a href="<?= base_url('pricing') ?>" class="text-decoration-none" style="color: #94a3b8;">Brand Pricing</a></li>
+            <li><a href="<?= base_url('how-it-works') ?>" class="text-decoration-none" style="color: #94a3b8;">ROI &amp; Analytics</a></li>
           </ul>
         </div>
 
-        <div>
-          <h4 style="color:white; font-size:1rem; margin-bottom:1.2rem;">Resources</h4>
-          <ul style="list-style:none; line-height:2.2; font-size:0.9rem;">
-            <li><a href="<?= base_url('blog') ?>" style="color:var(--gray-400);">Marketing Blog</a></li>
-            <li><a href="<?= base_url('faq') ?>" style="color:var(--gray-400);">Help &amp; FAQ</a></li>
-            <li><a href="<?= base_url('contact') ?>" style="color:var(--gray-400);">Contact Support</a></li>
-            <li><a href="<?= base_url('system/states') ?>" style="color:var(--gray-400);">System Gallery</a></li>
+        <div class="col-6 col-md-3 col-lg-2">
+          <h5 style="color: white; font-size: 1rem; font-weight: 600; margin-bottom: 1.2rem;">Resources</h5>
+          <ul class="list-unstyled d-flex flex-column gap-2" style="font-size: 0.9rem;">
+            <li><a href="<?= base_url('blog') ?>" class="text-decoration-none" style="color: #94a3b8;">Marketing Blog</a></li>
+            <li><a href="<?= base_url('faq') ?>" class="text-decoration-none" style="color: #94a3b8;">Help &amp; FAQ</a></li>
+            <li><a href="<?= base_url('contact') ?>" class="text-decoration-none" style="color: #94a3b8;">Contact Support</a></li>
+            <li><a href="<?= base_url('system/states') ?>" class="text-decoration-none" style="color: #94a3b8;">UI Gallery</a></li>
           </ul>
         </div>
 
-        <div>
-          <h4 style="color:white; font-size:1rem; margin-bottom:1.2rem;">Company</h4>
-          <ul style="list-style:none; line-height:2.2; font-size:0.9rem;">
-            <li><a href="#" style="color:var(--gray-400);">About CollabHub</a></li>
-            <li><a href="#" style="color:var(--gray-400);">Careers</a></li>
-            <li><a href="#" style="color:var(--gray-400);">Terms of Service</a></li>
-            <li><a href="#" style="color:var(--gray-400);">Privacy Policy</a></li>
+        <div class="col-6 col-md-3 col-lg-2">
+          <h5 style="color: white; font-size: 1rem; font-weight: 600; margin-bottom: 1.2rem;">Company</h5>
+          <ul class="list-unstyled d-flex flex-column gap-2" style="font-size: 0.9rem;">
+            <li><a href="#" class="text-decoration-none" style="color: #94a3b8;">About Us</a></li>
+            <li><a href="#" class="text-decoration-none" style="color: #94a3b8;">Careers</a></li>
+            <li><a href="#" class="text-decoration-none" style="color: #94a3b8;">Terms of Service</a></li>
+            <li><a href="#" class="text-decoration-none" style="color: #94a3b8;">Privacy Policy</a></li>
           </ul>
         </div>
       </div>
 
-      <div class="footer-bottom">
+      <div class="pt-4 border-top border-secondary d-flex flex-column flex-md-row justify-content-between align-items-center gap-3 text-secondary" style="font-size: 0.85rem; border-color: #334155 !important;">
         <div>&copy; <?= date('Y') ?> CollabHub Technologies Inc. All rights reserved.</div>
         <div>Built for Creators &amp; Brands worldwide.</div>
       </div>
