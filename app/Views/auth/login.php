@@ -32,12 +32,37 @@
         <!-- RIGHT FORM PANEL -->
         <div class="col-12 col-lg-7 p-4 p-md-5 bg-white">
           <h3 class="h4 fw-bold text-dark mb-1">Login to your account</h3>
-          <p class="text-muted small mb-4">Select your role credentials below</p>
+          <p class="text-muted small mb-4">Enter your credentials below to get started</p>
 
-          <form action="<?= base_url('creator/dashboard') ?>" method="get">
+          <!-- ALERT FLASH MESSAGES -->
+          <?php if (session()->getFlashdata('error')): ?>
+            <div class="alert alert-danger py-2 px-3 small rounded-3 mb-3 border-0 shadow-sm">
+              <?= session()->getFlashdata('error') ?>
+            </div>
+          <?php endif; ?>
+
+          <?php if (session()->getFlashdata('errors')): ?>
+            <div class="alert alert-danger py-2 px-3 small rounded-3 mb-3 border-0 shadow-sm">
+              <ul class="mb-0 ps-3">
+                <?php foreach (session()->getFlashdata('errors') as $error): ?>
+                  <li><?= esc($error) ?></li>
+                <?php endforeach; ?>
+              </ul>
+            </div>
+          <?php endif; ?>
+
+          <?php if (session()->getFlashdata('success')): ?>
+            <div class="alert alert-success py-2 px-3 small rounded-3 mb-3 border-0 shadow-sm">
+              <?= session()->getFlashdata('success') ?>
+            </div>
+          <?php endif; ?>
+
+          <form action="<?= base_url('login') ?>" method="post">
+            <?= csrf_field() ?>
+
             <div class="mb-3">
               <label class="form-label fw-bold small text-dark">Email Address</label>
-              <input type="email" class="form-control" value="priya@collabhub.com" required placeholder="you@example.com">
+              <input type="email" name="email" class="form-control" value="<?= old('email') ?>" required placeholder="you@example.com">
             </div>
 
             <div class="mb-3">
@@ -45,29 +70,22 @@
                 <label class="form-label fw-bold small text-dark mb-0">Password</label>
                 <a href="<?= base_url('forgot-password') ?>" class="small text-primary text-decoration-none">Forgot Password?</a>
               </div>
-              <input type="password" class="form-control" value="password123" required placeholder="••••••••">
+              <input type="password" name="password" class="form-control" required placeholder="••••••••">
             </div>
 
-            <div class="row g-2 mb-4">
-              <div class="col-6">
-                <a href="<?= base_url('creator/dashboard') ?>" class="btn btn-primary w-100">Login as Creator</a>
-              </div>
-              <div class="col-6">
-                <a href="<?= base_url('brand/dashboard') ?>" class="btn btn-outline w-100">Login as Brand</a>
-              </div>
-            </div>
+            <button type="submit" class="btn btn-primary w-100 py-2 mb-3 fw-bold">Sign In</button>
 
             <div class="text-center text-muted small position-relative my-3">
-              <span class="bg-white px-2 position-relative z-2">OR SOCIAL LOGIN</span>
+              <span class="bg-white px-2 position-relative z-2 text-uppercase extra-small fw-bold">Quick Demo Login</span>
               <div class="position-absolute top-50 start-0 end-0 border-bottom z-1"></div>
             </div>
 
-            <div class="d-flex flex-column gap-2 mb-4">
-              <button type="button" onclick="window.location.href='<?= base_url('creator/dashboard') ?>'" class="btn btn-outline w-100 justify-content-center">
-                Continue with Google
+            <div class="d-flex gap-2 mb-4">
+              <button type="button" onclick="fillDemo('priya@collabhub.com', 'password123')" class="btn btn-outline-secondary btn-sm w-100">
+                Demo Creator
               </button>
-              <button type="button" onclick="window.location.href='<?= base_url('brand/dashboard') ?>'" class="btn btn-outline w-100 justify-content-center">
-                Continue with Apple
+              <button type="button" onclick="fillDemo('brand@collabhub.com', 'password123')" class="btn btn-outline-secondary btn-sm w-100">
+                Demo Brand
               </button>
             </div>
 
@@ -81,5 +99,12 @@
     </div>
   </div>
 </section>
+
+<script>
+function fillDemo(email, password) {
+  document.querySelector('input[name="email"]').value = email;
+  document.querySelector('input[name="password"]').value = password;
+}
+</script>
 
 <?= $this->endSection() ?>

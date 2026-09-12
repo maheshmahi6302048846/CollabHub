@@ -5,7 +5,7 @@
 <!-- GREETING & STATS -->
 <div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-3 mb-4">
   <div>
-    <h1 class="h2 fw-bold mb-1 text-dark">Welcome back! 👋</h1>
+    <h1 class="h2 fw-bold mb-1 text-dark">Welcome back, <?= esc(session()->get('name') ?? 'Brand Owner') ?>! 👋</h1>
     <p class="text-secondary mb-0">Here's an overview of your brand campaigns and influencer reach.</p>
   </div>
   

@@ -129,13 +129,25 @@
             </div>
           </div>
 
-          <!-- User Avatar Menu -->
-          <div class="user-profile-menu" onclick="window.location.href='<?= base_url('creator/profile') ?>'">
-            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80" alt="Priya Sharma" class="avatar">
-            <div>
-              <div style="font-weight:700; font-size:0.875rem; color:var(--gray-900);">Priya Sharma</div>
-              <div style="font-size:0.75rem; color:var(--gray-500);">Creator &bull; Lifestyle</div>
+          <!-- User Avatar Menu & Session Controls -->
+          <?php 
+            $userName  = session()->get('name') ?? 'Creator';
+            $userEmail = session()->get('email') ?? 'creator@collabhub.com';
+            $initial   = strtoupper(substr($userName, 0, 1));
+          ?>
+          <div class="d-flex align-items-center gap-3">
+            <div class="user-profile-menu d-flex align-items-center gap-2" onclick="window.location.href='<?= base_url('creator/profile') ?>'">
+              <div class="avatar bg-primary text-white fw-bold d-flex align-items-center justify-content-center rounded-circle" style="width:36px;height:36px;font-size:0.95rem;background:var(--gradient-hero) !important;">
+                <?= esc($initial) ?>
+              </div>
+              <div>
+                <div style="font-weight:700; font-size:0.875rem; color:var(--gray-900);"><?= esc($userName) ?></div>
+                <div style="font-size:0.75rem; color:var(--gray-500);"><?= esc($userEmail) ?></div>
+              </div>
             </div>
+            <a href="<?= base_url('logout') ?>" class="btn btn-outline-danger btn-sm px-2 py-1" title="Log Out">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+            </a>
           </div>
         </div>
       </header>

@@ -2,6 +2,11 @@
 
 <?= $this->section('content') ?>
 
+<?php
+  $companyName = $brand['company_name'] ?? session()->get('name') ?? '';
+  $ownerName   = $brand['owner_name'] ?? '';
+?>
+
 <section class="py-5 bg-app" style="min-height: calc(100vh - 120px);">
   <div class="container container-sm">
     <div class="card border-0 shadow-lg rounded-4 p-4 p-md-5">
@@ -12,35 +17,32 @@
         <p class="text-muted small">Fill in your business details to start matching with verified content creators.</p>
       </div>
 
-      <form action="<?= base_url('brand/dashboard') ?>" method="get">
+      <form action="<?= base_url('brand/onboarding') ?>" method="post">
+        <?= csrf_field() ?>
+
         <div class="row g-3 mb-3">
           <div class="col-12 col-md-6">
             <label class="form-label fw-bold small text-dark">Company / Brand Name</label>
-            <input type="text" class="form-control" value="Reshe Clinic" required>
+            <input type="text" name="company_name" class="form-control" value="<?= esc($companyName) ?>" required placeholder="Acme Corp">
           </div>
           <div class="col-12 col-md-6">
-            <label class="form-label fw-bold small text-dark">Industry</label>
-            <select class="form-select">
-              <option selected>Fitness & Health Clinic</option>
-              <option>Beauty & Skincare</option>
-              <option>Fashion & Apparel</option>
-              <option>Food & Beverage</option>
-              <option>Technology & Software</option>
-            </select>
+            <label class="form-label fw-bold small text-dark">Owner / Manager Name</label>
+            <input type="text" name="owner_name" class="form-control" value="<?= esc($ownerName) ?>" placeholder="Your Name">
           </div>
-        </div>
-
-        <div class="mb-3">
-          <label class="form-label fw-bold small text-dark">Website URL</label>
-          <input type="url" class="form-control" value="https://resheclinic.com">
         </div>
 
         <div class="mb-4">
-          <label class="form-label fw-bold small text-dark">Business Description</label>
-          <textarea class="form-control" rows="3">Premium health and wellness clinic specializing in non-invasive weight loss treatments, metabolic health, and customized nutrition.</textarea>
+          <label class="form-label fw-bold small text-dark">Industry</label>
+          <select name="industry" class="form-select">
+            <option value="Health & Wellness">Health & Wellness</option>
+            <option value="Beauty & Cosmetics">Beauty & Cosmetics</option>
+            <option value="Fashion & Apparel">Fashion & Apparel</option>
+            <option value="Food & FMCG">Food & FMCG</option>
+            <option value="Tech & Software">Tech & Software</option>
+          </select>
         </div>
 
-        <button type="submit" class="btn btn-primary btn-lg w-100">Complete Business Profile &rarr;</button>
+        <button type="submit" class="btn btn-primary btn-lg w-100 fw-bold">Complete Business Profile &rarr;</button>
       </form>
 
     </div>

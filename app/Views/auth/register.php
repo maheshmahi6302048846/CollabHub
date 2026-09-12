@@ -12,7 +12,31 @@
         <p class="text-muted small">Join thousands of creators and brands growing together.</p>
       </div>
 
-      <form id="regForm" action="<?= base_url('creator/onboarding') ?>" method="get">
+      <!-- ALERT FLASH MESSAGES -->
+      <?php if (session()->getFlashdata('error')): ?>
+        <div class="alert alert-danger py-2 px-3 small rounded-3 mb-3 border-0 shadow-sm">
+          <?= session()->getFlashdata('error') ?>
+        </div>
+      <?php endif; ?>
+
+      <?php if (session()->getFlashdata('errors')): ?>
+        <div class="alert alert-danger py-2 px-3 small rounded-3 mb-3 border-0 shadow-sm">
+          <ul class="mb-0 ps-3">
+            <?php foreach (session()->getFlashdata('errors') as $error): ?>
+              <li><?= esc($error) ?></li>
+            <?php endforeach; ?>
+          </ul>
+        </div>
+      <?php endif; ?>
+
+      <?php if (session()->getFlashdata('success')): ?>
+        <div class="alert alert-success py-2 px-3 small rounded-3 mb-3 border-0 shadow-sm">
+          <?= session()->getFlashdata('success') ?>
+        </div>
+      <?php endif; ?>
+
+      <form id="regForm" action="<?= base_url('register') ?>" method="post">
+        <?= csrf_field() ?>
         
         <!-- ACCOUNT TYPE VISUAL SELECTION -->
         <div class="mb-4">
@@ -36,35 +60,35 @@
             </div>
 
           </div>
-          <input type="hidden" id="selectedRole" name="role" value="creator">
+          <input type="hidden" id="selectedRole" name="role" value="<?= old('role', 'creator') ?>">
         </div>
 
         <div class="row g-3 mb-3">
           <div class="col-12 col-md-6">
-            <label class="form-label fw-bold small text-dark">Full Name</label>
-            <input type="text" class="form-control" placeholder="Priya Sharma" required>
+            <label class="form-label fw-bold small text-dark">Full Name / Company Name</label>
+            <input type="text" name="name" class="form-control" value="<?= old('name') ?>" placeholder="Priya Sharma or Acme Corp" required>
           </div>
 
           <div class="col-12 col-md-6">
             <label class="form-label fw-bold small text-dark">Email Address</label>
-            <input type="email" class="form-control" placeholder="you@example.com" required>
+            <input type="email" name="email" class="form-control" value="<?= old('email') ?>" placeholder="you@example.com" required>
           </div>
         </div>
 
         <div class="row g-3 mb-3">
           <div class="col-12 col-md-6">
             <label class="form-label fw-bold small text-dark">Password</label>
-            <input type="password" class="form-control" placeholder="••••••••" required>
+            <input type="password" name="password" class="form-control" placeholder="••••••••" required>
           </div>
 
           <div class="col-12 col-md-6">
             <label class="form-label fw-bold small text-dark">Confirm Password</label>
-            <input type="password" class="form-control" placeholder="••••••••" required>
+            <input type="password" name="confirm_password" class="form-control" placeholder="••••••••" required>
           </div>
         </div>
 
-        <button type="submit" id="submitRegBtn" class="btn btn-primary btn-lg w-100 mt-2">
-          Continue to Setup &rarr;
+        <button type="submit" id="submitRegBtn" class="btn btn-primary btn-lg w-100 mt-2 fw-bold">
+          Create Account &rarr;
         </button>
 
         <div class="text-center small text-muted mt-4">
@@ -78,27 +102,28 @@
 
 <script>
 function selectRole(role) {
-  const form = document.getElementById('regForm');
   const roleCreator = document.getElementById('roleCreator');
   const roleBrand = document.getElementById('roleBrand');
   const selectedRole = document.getElementById('selectedRole');
 
   if (role === 'creator') {
     selectedRole.value = 'creator';
-    form.action = "<?= base_url('creator/onboarding') ?>";
     roleCreator.style.borderColor = "var(--primary-600)";
     roleCreator.style.background = "var(--primary-50)";
     roleBrand.style.borderColor = "var(--gray-200)";
     roleBrand.style.background = "white";
   } else {
     selectedRole.value = 'brand';
-    form.action = "<?= base_url('brand/onboarding') ?>";
     roleBrand.style.borderColor = "var(--primary-600)";
     roleBrand.style.background = "var(--primary-50)";
     roleCreator.style.borderColor = "var(--gray-200)";
     roleCreator.style.background = "white";
   }
 }
+// Set initial selection if old input exists
+document.addEventListener("DOMContentLoaded", function() {
+  selectRole("<?= old('role', 'creator') ?>");
+});
 </script>
 
 <?= $this->endSection() ?>

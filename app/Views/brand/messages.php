@@ -10,13 +10,15 @@
     </div>
     <div class="chat-list">
       <div class="chat-item active">
-        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=80&q=80" class="avatar avatar-sm">
+        <div class="avatar bg-primary text-white fw-bold d-flex align-items-center justify-content-center rounded-circle" style="width:36px;height:36px;font-size:0.95rem;background:var(--gradient-hero) !important;">
+          C
+        </div>
         <div style="flex:1; min-width:0;">
           <div style="display:flex; justify-content:space-between; align-items:center;">
-            <div style="font-weight:700; font-size:0.9rem; color:var(--gray-900);">Priya Sharma</div>
-            <span style="font-size:0.7rem; color:var(--gray-400);">10:42 AM</span>
+            <div style="font-weight:700; font-size:0.9rem; color:var(--gray-900);">Creator Applicant</div>
+            <span style="font-size:0.7rem; color:var(--gray-400);">Live</span>
           </div>
-          <div style="font-size:0.8rem; color:var(--gray-600); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">Script draft submitted for review</div>
+          <div style="font-size:0.8rem; color:var(--gray-600); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">Direct Messaging Chat</div>
         </div>
       </div>
     </div>
@@ -26,30 +28,40 @@
   <div class="chat-main">
     <div class="chat-header">
       <div style="display:flex; align-items:center; gap:0.75rem;">
-        <button type="button" class="btn btn-sm btn-outline d-lg-none py-1 px-2 me-1" onclick="toggleMobileChat(false)" title="Back to Messages">&larr; Back</button>
-        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=80&q=80" class="avatar avatar-sm">
+        <div class="avatar bg-primary text-white fw-bold d-flex align-items-center justify-content-center rounded-circle" style="width:36px;height:36px;font-size:0.95rem;background:var(--gradient-hero) !important;">
+          C
+        </div>
         <div>
-          <div style="font-weight:700; font-size:0.95rem; color:var(--gray-900);">Priya Sharma</div>
-          <div style="font-size:0.75rem; color:var(--success-main); font-weight:600;">● Active Creator &bull; Weight Loss Campaign</div>
+          <div style="font-weight:700; font-size:0.95rem; color:var(--gray-900);">Content Creator Chat</div>
+          <div style="font-size:0.75rem; color:var(--success-main); font-weight:600;">● Active Brand Collaboration</div>
         </div>
       </div>
     </div>
 
-    <div class="chat-messages" id="chatMessages">
-      <div class="message-bubble message-received">
-        <p>Hi team! I published the Instagram Reel and tagged @resheclinic. Here is the post analytics link.</p>
-        <div style="font-size:0.7rem; color:var(--gray-500); margin-top:4px;">10:42 AM</div>
+    <!-- MESSAGES AREA -->
+    <div class="chat-messages" id="chatMessages" style="max-height:400px; overflow-y:auto; padding:1rem;">
+      <div class="message-bubble message-received mb-3 p-3 bg-light rounded-3" style="max-width:75%;">
+        <p class="mb-1 text-dark">Hi! Direct brand messaging portal. You can communicate with applicant creators here.</p>
+        <div style="font-size:0.7rem; color:var(--gray-500);">System Message</div>
       </div>
 
-      <div class="message-bubble message-sent">
-        <p>Outstanding work Priya! We see great traction on the reel. Escrow payment of ₹25,000 has been approved!</p>
-        <div style="font-size:0.7rem; opacity:0.8; text-align:right; margin-top:4px;">10:45 AM</div>
-      </div>
+      <?php if (!empty($chatMessages)): ?>
+        <?php foreach ($chatMessages as $msg): ?>
+          <?php $isMine = (int)$msg['sender_id'] === (int)session()->get('user_id'); ?>
+          <div class="message-bubble <?= $isMine ? 'message-sent ms-auto text-end bg-primary text-white' : 'message-received bg-light text-dark' ?> mb-3 p-3 rounded-3" style="max-width:75%;">
+            <p class="mb-1"><?= esc($msg['message']) ?></p>
+            <div style="font-size:0.7rem; opacity:0.8;"><?= date('h:i A', strtotime($msg['created_at'])) ?></div>
+          </div>
+        <?php endforeach; ?>
+      <?php endif; ?>
     </div>
 
-    <form class="chat-composer" id="chatForm">
-      <input type="text" id="chatInput" class="form-control" placeholder="Type your message..." required style="flex:1;">
-      <button type="submit" class="btn btn-primary">Send &rarr;</button>
+    <!-- CHAT COMPOSER -->
+    <form action="<?= base_url('brand/send-message') ?>" method="post" class="chat-composer p-3 border-top d-flex gap-2">
+      <?= csrf_field() ?>
+      <input type="hidden" name="receiver_id" value="<?= esc($receiverId ?? 7) ?>">
+      <input type="text" name="message" class="form-control" placeholder="Type your message..." required style="flex:1;">
+      <button type="submit" class="btn btn-primary px-4 fw-bold">Send &rarr;</button>
     </form>
   </div>
 </div>

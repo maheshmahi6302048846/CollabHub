@@ -11,140 +11,56 @@
   <a href="<?= base_url('brand/campaigns/create') ?>" class="btn btn-primary px-4 py-2 text-nowrap">+ Create Campaign</a>
 </div>
 
-<div class="card border-0 shadow-sm rounded-4 p-3 p-md-4 tab-container">
-  <div class="d-flex flex-wrap gap-2 border-bottom pb-3 mb-4">
-    <a href="#" class="btn btn-primary btn-sm tab-link active" data-tab="brandAllCamp">All (12)</a>
-    <a href="#" class="btn btn-outline btn-sm tab-link" data-tab="brandActiveCamp">Active (8)</a>
-    <a href="#" class="btn btn-outline btn-sm tab-link" data-tab="brandDraftCamp">Drafts (2)</a>
+<!-- FLASH MESSAGES -->
+<?php if (session()->getFlashdata('success')): ?>
+  <div class="alert alert-success py-2 px-3 small rounded-3 mb-3 border-0 shadow-sm">
+    <?= session()->getFlashdata('success') ?>
   </div>
+<?php endif; ?>
 
-  <!-- ALL CAMPAIGNS TAB -->
-  <div id="brandAllCamp" class="tab-pane active">
-    <div class="table-responsive">
-      <table class="table align-middle mb-0">
-        <thead>
-          <tr class="text-secondary small">
-            <th>Campaign Name</th>
-            <th>Category</th>
-            <th>Influencer Count</th>
-            <th>Status</th>
-            <th class="text-end">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
+<div class="card border-0 shadow-sm rounded-4 p-3 p-md-4">
+  <div class="table-responsive">
+    <table class="table align-middle mb-0">
+      <thead>
+        <tr class="text-secondary small">
+          <th>Campaign Name</th>
+          <th>Category</th>
+          <th>Budget</th>
+          <th>Creators Hired / Needed</th>
+          <th>Status</th>
+          <th class="text-end">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php if (!empty($campaigns)): ?>
+          <?php foreach ($campaigns as $camp): ?>
+            <tr>
+              <td class="fw-bold text-dark">
+                <?= esc($camp['title']) ?>
+                <div class="small text-muted fw-normal"><?= esc($camp['deliverables'] ?? '') ?></div>
+              </td>
+              <td class="small text-secondary"><?= esc($camp['category']) ?></td>
+              <td class="fw-bold text-primary">₹<?= number_format($camp['budget']) ?></td>
+              <td class="small text-secondary"><?= esc($camp['influencers_hired'] ?? 0) ?> / <?= esc($camp['influencers_needed'] ?? 1) ?> Creators</td>
+              <td>
+                <span class="badge <?= $camp['status'] === 'active' ? 'badge-success' : 'badge-pending' ?>">
+                  <?= ucfirst(esc($camp['status'])) ?>
+                </span>
+              </td>
+              <td class="text-end">
+                <a href="<?= base_url('brand/requests') ?>" class="btn btn-outline-primary btn-sm px-3">View Applicants</a>
+              </td>
+            </tr>
+          <?php endforeach; ?>
+        <?php else: ?>
           <tr>
-            <td class="fw-bold text-dark">Weight Loss Awareness Campaign</td>
-            <td class="small text-secondary">Fitness &amp; Health</td>
-            <td class="small text-secondary">8 / 10 Creators</td>
-            <td><span class="badge badge-success">Active</span></td>
-            <td class="text-end">
-              <a href="<?= base_url('brand/requests') ?>" class="btn btn-outline btn-sm px-3">View Applicants</a>
+            <td colspan="6" class="text-center py-4 text-muted">
+              No campaigns created yet. Click <strong>"+ Create Campaign"</strong> above to launch your first brand campaign!
             </td>
           </tr>
-          <tr>
-            <td class="fw-bold text-dark">Summer Skincare Glow Promotion</td>
-            <td class="small text-secondary">Beauty &amp; Lifestyle</td>
-            <td class="small text-secondary">5 / 5 Creators</td>
-            <td><span class="badge badge-success">Active</span></td>
-            <td class="text-end">
-              <a href="<?= base_url('brand/requests') ?>" class="btn btn-outline btn-sm px-3">View Applicants</a>
-            </td>
-          </tr>
-          <tr>
-            <td class="fw-bold text-dark">Plant Protein Shake Launch</td>
-            <td class="small text-secondary">Food &amp; Wellness</td>
-            <td class="small text-secondary">0 / 8 Creators</td>
-            <td><span class="badge badge-pending">Draft</span></td>
-            <td class="text-end">
-              <a href="<?= base_url('brand/campaigns/create') ?>" class="btn btn-outline btn-sm px-3">Edit Draft</a>
-            </td>
-          </tr>
-          <tr>
-            <td class="fw-bold text-dark">Monsoon Immunity Booster Campaign</td>
-            <td class="small text-secondary">Health &amp; Wellness</td>
-            <td class="small text-secondary">0 / 6 Creators</td>
-            <td><span class="badge badge-pending">Draft</span></td>
-            <td class="text-end">
-              <a href="<?= base_url('brand/campaigns/create') ?>" class="btn btn-outline btn-sm px-3">Edit Draft</a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-  <!-- ACTIVE CAMPAIGNS TAB -->
-  <div id="brandActiveCamp" class="tab-pane">
-    <div class="table-responsive">
-      <table class="table align-middle mb-0">
-        <thead>
-          <tr class="text-secondary small">
-            <th>Campaign Name</th>
-            <th>Category</th>
-            <th>Influencer Count</th>
-            <th>Status</th>
-            <th class="text-end">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="fw-bold text-dark">Weight Loss Awareness Campaign</td>
-            <td class="small text-secondary">Fitness &amp; Health</td>
-            <td class="small text-secondary">8 / 10 Creators</td>
-            <td><span class="badge badge-success">Active</span></td>
-            <td class="text-end">
-              <a href="<?= base_url('brand/requests') ?>" class="btn btn-outline btn-sm px-3">View Applicants</a>
-            </td>
-          </tr>
-          <tr>
-            <td class="fw-bold text-dark">Summer Skincare Glow Promotion</td>
-            <td class="small text-secondary">Beauty &amp; Lifestyle</td>
-            <td class="small text-secondary">5 / 5 Creators</td>
-            <td><span class="badge badge-success">Active</span></td>
-            <td class="text-end">
-              <a href="<?= base_url('brand/requests') ?>" class="btn btn-outline btn-sm px-3">View Applicants</a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-  <!-- DRAFT CAMPAIGNS TAB -->
-  <div id="brandDraftCamp" class="tab-pane">
-    <div class="table-responsive">
-      <table class="table align-middle mb-0">
-        <thead>
-          <tr class="text-secondary small">
-            <th>Campaign Name</th>
-            <th>Category</th>
-            <th>Influencer Count</th>
-            <th>Status</th>
-            <th class="text-end">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="fw-bold text-dark">Plant Protein Shake Launch</td>
-            <td class="small text-secondary">Food &amp; Wellness</td>
-            <td class="small text-secondary">0 / 8 Creators</td>
-            <td><span class="badge badge-pending">Draft</span></td>
-            <td class="text-end">
-              <a href="<?= base_url('brand/campaigns/create') ?>" class="btn btn-outline btn-sm px-3">Edit Draft</a>
-            </td>
-          </tr>
-          <tr>
-            <td class="fw-bold text-dark">Monsoon Immunity Booster Campaign</td>
-            <td class="small text-secondary">Health &amp; Wellness</td>
-            <td class="small text-secondary">0 / 6 Creators</td>
-            <td><span class="badge badge-pending">Draft</span></td>
-            <td class="text-end">
-              <a href="<?= base_url('brand/campaigns/create') ?>" class="btn btn-outline btn-sm px-3">Edit Draft</a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+        <?php endif; ?>
+      </tbody>
+    </table>
   </div>
 </div>
 

@@ -70,8 +70,14 @@
           <a href="javascript:void(0)" onclick="openModal('globalSearchModal')" class="btn btn-icon btn-outline me-1" title="Search">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
           </a>
-          <a href="<?= base_url('login') ?>" class="btn btn-outline">Login</a>
-          <a href="<?= base_url('register') ?>" class="btn btn-primary">Get Started</a>
+          <?php if (session()->get('isLoggedIn')): ?>
+            <?php $dashboardUrl = session()->get('role') === 'brand' ? 'brand/dashboard' : 'creator/dashboard'; ?>
+            <a href="<?= base_url($dashboardUrl) ?>" class="btn btn-primary btn-sm px-3 fw-bold">Dashboard</a>
+            <a href="<?= base_url('logout') ?>" class="btn btn-outline-danger btn-sm px-3">Logout</a>
+          <?php else: ?>
+            <a href="<?= base_url('login') ?>" class="btn btn-outline">Login</a>
+            <a href="<?= base_url('register') ?>" class="btn btn-primary">Get Started</a>
+          <?php endif; ?>
         </div>
       </div>
     </div>

@@ -4,7 +4,7 @@
 
 <!-- GREETING & STATS -->
 <div class="mb-4">
-  <h1 class="h2 fw-bold mb-1 text-dark">Good morning, Priya 👋</h1>
+  <h1 class="h2 fw-bold mb-1 text-dark">Good morning, <?= esc(session()->get('name') ?? 'Creator') ?> 👋</h1>
   <p class="text-secondary mb-0">Here's what's happening with your creator account today.</p>
 </div>
 
