@@ -107,6 +107,13 @@
         <div id="searchResultsList" style="margin-top:1rem;">
           <div style="font-size:0.8rem; font-weight:700; color:var(--gray-400); text-transform:uppercase; margin-bottom:0.5rem;">Popular Searches</div>
           <div style="display:flex; flex-wrap:wrap; gap:0.5rem;">
+            <a href="<?= base_url('for-influencers') ?>" class="badge bg-light text-dark text-decoration-none p-2">Beauty &amp; Fashion</a>
+            <a href="<?= base_url('for-influencers') ?>" class="badge bg-light text-dark text-decoration-none p-2">Tech &amp; Gadgets</a>
+            <a href="<?= base_url('for-influencers') ?>" class="badge bg-light text-dark text-decoration-none p-2">Paid Collaborations</a>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- FOOTER -->
