@@ -11,13 +11,12 @@ jobs:
     name: Deploy to InfinityFree
     runs-on: ubuntu-latest
     steps:
-      - name: 🚚 Get latest code
+      - name: 🚚 Checkout Code
         uses: actions/checkout@v4
 
-      - name: 📂 Sync files to InfinityFree FTP
-        uses: wbond/actions-ftp-deploy@v5
-        with:
-          host: ${{ secrets.FTP_SERVER }}
-          user: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          remote-dir: htdocs/
+      - name: 🛠️ Install git-ftp
+        run: sudo apt-get update && sudo apt-get install -y git-ftp
+
+      - name: 🚀 Sync Code to InfinityFree
+        run: |
+          git ftp push --force --user "${{ secrets.FTP_USERNAME }}" --passwd "${{ secrets.FTP_PASSWORD }}" --syncroot . ftp://${{ secrets.FTP_SERVER }}/htdocs/
