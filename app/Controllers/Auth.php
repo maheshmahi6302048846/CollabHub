@@ -40,7 +40,7 @@ class Auth extends BaseController
                 return redirect()->back()->withInput()->with('error', 'Invalid email address or password.');
             }
 
-            if ($user['status'] !== 'active') {
+            if (isset($user['status']) && $user['status'] !== 'active') {
                 return redirect()->back()->withInput()->with('error', 'Your account has been deactivated.');
             }
 
@@ -68,10 +68,11 @@ class Auth extends BaseController
             $redirectUrl = $user['role'] === 'brand' ? 'brand/dashboard' : 'creator/dashboard';
             return redirect()->to(base_url($redirectUrl))->with('success', 'Welcome back, ' . esc($name) . '!');
         } catch (\Throwable $e) {
-            log_message('error', 'Login Error: ' . $e->getMessage());
-            return redirect()->back()->withInput()->with('error', 'Login error: ' . $e->getMessage());
+            log_message('error', 'Login Exception: ' . $e->getMessage());
+            return redirect()->back()->withInput()->with('error', 'System Alert: ' . $e->getMessage());
         }
     }
+
 
     public function register()
     {
@@ -147,8 +148,8 @@ class Auth extends BaseController
             $redirectUrl = $role === 'brand' ? 'brand/dashboard' : 'creator/dashboard';
             return redirect()->to(base_url($redirectUrl))->with('success', 'Account created successfully! Welcome to CollabHub.');
         } catch (\Throwable $e) {
-            log_message('error', 'Register Error: ' . $e->getMessage());
-            return redirect()->back()->withInput()->with('error', 'Registration error: ' . $e->getMessage());
+            log_message('error', 'Register Exception: ' . $e->getMessage());
+            return redirect()->back()->withInput()->with('error', 'Registration System Error: ' . $e->getMessage());
         }
     }
 

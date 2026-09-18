@@ -60,6 +60,7 @@
           <form action="<?= base_url('login') ?>" method="post">
             <?= csrf_field() ?>
 
+
             <div class="mb-3">
               <label class="form-label fw-bold small text-dark">Email Address</label>
               <input type="email" name="email" class="form-control" value="<?= old('email') ?>" required placeholder="you@example.com">

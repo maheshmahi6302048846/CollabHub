@@ -200,14 +200,5 @@ class Database extends Config
         if (ENVIRONMENT === 'testing') {
             $this->defaultGroup = 'tests';
         }
-
-        // Automatic fallback configuration for InfinityFree live hosting
-        if (isset($_SERVER['HTTP_HOST']) && str_contains($_SERVER['HTTP_HOST'], 'infinityfreeapp.com')) {
-            if ($this->default['hostname'] === 'localhost' || empty($this->default['database'])) {
-                $this->default['hostname'] = env('database.default.hostname', 'sql213.infinityfree.com');
-                $this->default['database'] = env('database.default.database', 'if0_42897442_collabhub');
-                $this->default['username'] = env('database.default.username', 'if0_42897442');
-            }
-        }
     }
 }
